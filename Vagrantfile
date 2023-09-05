@@ -75,5 +75,7 @@ Vagrant.configure("2") do |config|
      apt-get install -y htop
      apt-get install -y nano
      apt-get install -y python3
+     systemctl start apache2
+     systemctl enable apache2
    SHELL
 end
