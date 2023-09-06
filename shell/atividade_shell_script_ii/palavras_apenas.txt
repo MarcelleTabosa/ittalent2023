@@ -1,0 +1,3 @@
+Oi, shell! Você sabe quantas palavras estão escritas neste arquivo txt?
+Vou te ajudar!
+Tem dezessete palavras!
