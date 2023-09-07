@@ -20,7 +20,7 @@ echo "3 - MULTIPLICAÇÃO"
 echo "4 - DIVISÃO"
 
 read OPCAO
-if  [ $OPCAO -eq 1 -o $OPCAO -eq 2 -o $OPCAO -eq 3  -o $OPCAO -eq 4 ]
+if  [ $OPCAO -ge 1 -o $OPCAO -le 4 ]
 then
     echo "Digite dois números"
     read NUM1
@@ -29,16 +29,12 @@ fi
 
 case $OPCAO in
 1)
-    echo "Opção escolhida: ADIÇÃO" 
     Adicao;;
 2)
-    echo "Opção escolhida: SUBTRAÇÃO"
     Subtracao;;
 3)
-    echo "Opção escolhida: MULTIPLICAÇÃO"
     Multiplicacao;;
 4)
-    echo "Opção escolhida: DIVISÃO"
     Divisao;;
 *)
     echo "INVÁLIDO";;
