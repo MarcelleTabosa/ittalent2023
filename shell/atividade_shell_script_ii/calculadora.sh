@@ -1,5 +1,18 @@
 #!/bin/bash
 
+Adicao(){
+    echo "$NUM1 + $NUM2 = $[$NUM1 + $NUM2]"
+}
+Subtracao(){
+    echo "$NUM1 - $NUM2 = $[$NUM1 - $NUM2]"
+}
+Multiplicacao(){
+    echo "$NUM1 * $NUM2 = $[$NUM1 * $NUM2]" 
+}
+Divisao(){
+    echo "$NUM1 / $NUM2 = $[$NUM1 / $NUM2]" 
+}
+
 echo "Escolha uma opção"
 echo "1 - ADIÇÃO"
 echo "2 - SUBTRAÇÃO"
@@ -16,17 +29,21 @@ fi
 
 case $OPCAO in
 1)
-    echo "Opção escolhida: ADIÇÃO"
-    echo "$NUM1 + $NUM2 = $[$NUM1 + $NUM2]" ;;
+    echo "Opção escolhida: ADIÇÃO" 
+    Adicao;;
 2)
     echo "Opção escolhida: SUBTRAÇÃO"
-    echo "$NUM1 - $NUM2 = $[$NUM1 - $NUM2]" ;;
+    Subtracao;;
 3)
     echo "Opção escolhida: MULTIPLICAÇÃO"
-    echo "$NUM1 * $NUM2 = $[$NUM1 * $NUM2]" ;;
+    Multiplicacao;;
 4)
     echo "Opção escolhida: DIVISÃO"
-    echo "$NUM1 / $NUM2 = $[$NUM1 / $NUM2]" ;;
+    Divisao;;
 *)
     echo "INVÁLIDO";;
 esac
+
+
+   
+    
