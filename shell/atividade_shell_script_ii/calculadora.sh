@@ -20,7 +20,7 @@ echo "3 - MULTIPLICAÇÃO"
 echo "4 - DIVISÃO"
 
 read OPCAO
-if  [ $OPCAO -ge 1 -o $OPCAO -le 4 ]
+if  [ $OPCAO -ge 1 -a $OPCAO -le 4 ]
 then
     echo "Digite dois números"
     read NUM1
