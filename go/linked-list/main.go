@@ -45,12 +45,47 @@ func (l List) showList() {
 	}
 }
 
+func (l List) findByData(data int) []uint {
+	var result []uint
+	var no *No
+
+	no = l.start
+	for no != nil {
+		if no.data == data {
+			result = append(result, no.position)
+		}
+		no = no.next
+	}
+	return result
+}
+
+func (l List) findByPosition(positions []uint) []No {
+
+	var result []No
+	var no *No
+
+	for _, position := range positions {
+		no = l.start
+		for no != nil {
+			if no.position == position {
+				result = append(result, *no)
+			}
+			no = no.next
+		}
+	}
+	return result
+}
+
 func main() {
 	var list List
-	list.addData(45)
+	list.addData(10)
 	list.addData(55)
 	list.addData(88)
-	list.addData(99)
+	list.addData(10)
 
 	list.showList()
+	positions := list.findByData(10)
+	fmt.Println(positions)
+	nos := list.findByPosition(positions)
+	fmt.Println(nos)
 }
