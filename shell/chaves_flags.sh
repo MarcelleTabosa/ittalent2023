@@ -45,19 +45,9 @@ VERSAO="v1.0"
 # ------------------------------------------------------------------------ #
 
 #-----------------------------------------------------------------------------------------------------------------#
-if [ "$1" = "-h" ]
-then
-    echo "$MENSAGEM_USO" && exit 0
-fi
-
-if [ "$1" = "-v" ]
-then
-    echo "$VERSAO" && exit 0
-fi
-
-if [ "$1" = "-s" ]
-then
-    echo "$USUARIOS" | sort && exit 0
-fi
-
-echo "$USUARIOS" && exit 0
+case "$1" in
+    -h) echo "$MENSAGEM_USO" && exit 0 ;;
+    -v) echo "$VERSAO" && exit 0 ;;
+    -s) echo "$USUARIOS" | sort && exit 0;;
+    *) echo "$USUARIOS" && exit 0
+esac
