@@ -4,8 +4,13 @@ import (
 	"fmt"
 )
 
+type Person struct {
+	name     string
+	lastName string
+}
+
 type No struct {
-	data     int
+	person   Person
 	position uint
 	inactive bool
 	previous *No
@@ -27,9 +32,11 @@ func (l List) setLastPosition() uint {
 	return position
 }
 
-func (l *List) addData(data int) {
+func (l *List) addData(data Person) {
 	var no No
-	no.data = data
+	no.person.name = data.name
+	no.person.lastName = data.lastName
+
 	if l.start == nil {
 		l.start = &no
 		l.end = &no
@@ -47,19 +54,19 @@ func (l List) showList() {
 	fmt.Println("List:")
 	for no != nil {
 		fmt.Printf(
-			"Current position: %p %d - data: %d - previous: %p - next %p - deleted: %t\n",
-			no, no.position, no.data, no.previous, no.next, no.inactive)
+			"Current position: %p %d - data: %s - previous: %p - next %p - deleted: %t\n",
+			no, no.position, no.person, no.previous, no.next, no.inactive)
 		no = no.next
 	}
 }
 
-func (l List) findByData(data int) []uint {
+func (l List) findByData(data Person) []uint {
 	var result []uint
 	var no *No
 
 	no = l.start
 	for no != nil {
-		if no.data == data {
+		if no.person == data {
 			result = append(result, no.position)
 		}
 		no = no.next
@@ -108,11 +115,10 @@ func (l *List) logicalDeletion(positions []uint) []Deleted {
 
 func (l *List) deletionDefined() {
 	var no, deleted *No
-	var position uint = 0
-
 	no = l.start
 	for no != nil {
 		if no.inactive {
+			deleted = no
 			if no == l.start {
 				l.start = no.next
 				l.start.previous = nil
@@ -123,14 +129,12 @@ func (l *List) deletionDefined() {
 				no.previous.next = no.next
 				no.next.previous = no.previous
 			}
-			deleted = no
-			position = no.position
+
 			for deleted != nil {
-				socorroDeus := deleted.next.position
-				deleted.next.position = position
-				position = socorroDeus
+				deleted.position = deleted.position - 1
 				deleted = deleted.next
 			}
+			deleted = nil
 		}
 		no = no.next
 	}
@@ -138,15 +142,15 @@ func (l *List) deletionDefined() {
 
 func main() {
 	var list List
-	list.addData(10)
-	list.addData(55)
-	list.addData(26)
-	list.addData(88)
-	list.addData(10)
-	list.addData(34)
-	list.addData(10)
+	list.addData(Person{"Marcelle", "Oliveira"})
+	list.addData(Person{"Marcelle", "Tabosa"})
+	list.addData(Person{"Marcelle", "Souza"})
+	list.addData(Person{"Marcelle", "Souza"})
+	list.addData(Person{"Marcelle", "Oliveira"})
+	list.addData(Person{"Marcelle", "Tabosa"})
+	list.addData(Person{"Marcelle", "Oliveira"})
 	list.showList()
-	positions := list.findByData(10)
+	positions := list.findByData(Person{"Marcelle", "Oliveira"})
 	fmt.Println(positions)
 	nos := list.findByPosition(positions)
 	fmt.Println(nos)
