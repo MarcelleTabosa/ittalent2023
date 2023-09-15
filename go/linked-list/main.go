@@ -140,6 +140,21 @@ func (l *List) deletionDefined() {
 	}
 }
 
+func (l *List) updatePerson(position uint, data Person) {
+	var no *No
+	no = l.start
+
+	for no != nil {
+		if no.position == position {
+			no.person.name = data.name
+			no.person.lastName = data.lastName
+			no = nil
+		} else {
+			no = no.next
+		}
+	}
+}
+
 func main() {
 	var list List
 	list.addData(Person{"Marcelle", "Oliveira"})
@@ -159,5 +174,7 @@ func main() {
 	list.showList()
 	fmt.Println("Deletion defined")
 	list.deletionDefined()
+	list.showList()
+	list.updatePerson(0, Person{"Marcelle", "Tabosa de Souza"})
 	list.showList()
 }
