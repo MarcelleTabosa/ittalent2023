@@ -1,0 +1,12 @@
+Vagrant.configure("2") do |config|
+
+  config.vm.define "ubuntuserve1" do |ubuntuserve1|
+    ubuntuserve1.vm.box = "ubuntu/trusty64"
+    ubuntuserve1.vm.network "private_network", ip: "192.168.56.10"
+  end
+
+  config.vm.define "ubuntuserve2" do |ubuntuserve2|
+    ubuntuserve2.vm.box = "ubuntu/trusty64"
+    ubuntuserve2.vm.network "private_network", ip: "192.168.56.11"
+  end
+end

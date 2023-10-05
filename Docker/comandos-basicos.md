@@ -5,6 +5,8 @@
 
 ##### Lista os containers ativos 
 - docker ps
+- docker container ls
+- docker container list
 
 ##### Lista os containers ativos e inativos
 - docker ps -a
@@ -38,3 +40,12 @@
 
 #### Mapea volumes
 - docker run -p 8080:80 -v $(pwd)/html:/usr/share/nginx/html nginx
+
+#### Baixa iso, cria container, executa, define porta e volume
+- docker run -d --name my-nginx -p 8080:80 -v $(pwd)/html:/usr/share/nginx/html nginx
+
+#### Inspeciona o container
+- docker inspect my-nginx
+
+#### Verifica nome do sistema executado no container
+- docker exec my-nginx uname -or

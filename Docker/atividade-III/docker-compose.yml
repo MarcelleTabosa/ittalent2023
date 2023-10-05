@@ -1,0 +1,48 @@
+version: '3.1'
+
+networks:
+  wordpress-mysql:
+    driver: bridge
+
+services:
+  celle-wordpress:
+    image: wordpress
+    restart: always
+    ports:
+      - 8080:80
+    environment:
+      WORDPRESS_DB_HOST: celle-mysql
+      WORDPRESS_DB_USER: usermysql
+      WORDPRESS_DB_PASSWORD: passwordmysql
+      WORDPRESS_DB_NAME: databasemysql
+    volumes:
+      - wordpressvol:/var/www/html
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 512M
+    networks:
+      - wordpress-mysql
+
+  celle-mysql:
+    image: mysql
+    restart: always
+    environment:
+      MYSQL_DATABASE: databasemysql
+      MYSQL_USER: usermysql
+      MYSQL_PASSWORD: passwordmysql
+      MYSQL_ROOT_PASSWORD: '12345678'
+    volumes:
+      - mysqlvol:/var/lib/mysql
+    deploy:
+      resources:
+        limits:
+          cpus: "1"
+          memory: 512M
+    networks:
+      - wordpress-mysql
+
+volumes:
+  wordpressvol:
+  mysqlvol:
