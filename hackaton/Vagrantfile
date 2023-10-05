@@ -1,0 +1,36 @@
+Vagrant.configure("2") do |config|
+  config.vm.define "ubuntu" do |ubuntu|
+    ubuntu.vm.box = "ubuntu/focal64"
+    ubuntu.vm.hostname = "joaomarcelle"
+    ubuntu.vm.network "forwarded_port", guest: 80, host: 4000
+    ubuntu.vm.network "private_network", ip: "192.168.56.10"
+    ubuntu.vm.provider "virtualbox" do |vbu|  
+      vbu.memory = 1024
+      vbu.cpus = 1
+    end
+    ubuntu.vm.provision "shell", inline: <<-SHELL
+      apt-get update
+      apt install git -y
+      apt install wget -y
+      curl -fsSL https://get.docker.com -o get-docker.sh
+      sh get-docker.sh
+      rm get-docker.sh
+      groupadd docker
+      usermod -aG docker vagrant
+    SHELL
+  end
+
+  config.vm.define "centos" do |centos|
+    centos.vm.box = "centos/7"
+    centos.vm.hostname = "joaomarcelle"
+    centos.vm.network "private_network", ip: "192.168.56.11"
+    centos.vm.provider "virtualbox" do |vbc|  
+      vbc.memory = 1024
+      vbc.cpus = 1
+    end
+    centos.vm.provision "shell", inline: <<-SHELL
+      yum install htop -y
+      yum install vim-enhanced -y
+    SHELL
+  end
+end
